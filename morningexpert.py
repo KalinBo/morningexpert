@@ -43,7 +43,13 @@ class MorningexpertTests():
 
 
 
-
+    def webapp(self):
+        new_url = "https://web.morningexpert.com/#"
+        self.driver.get(new_url)
+        time.sleep(2)
+        login_web_app = self.driver.find_element(By.XPATH, "//a[@id='loginButton' and (text())='Login']")
+        login_web_app.click()
+        time.sleep(2)
 
 
 
@@ -56,6 +62,5 @@ class MorningexpertTests():
 
 tests = MorningexpertTests()
 tests.prepare_and_start_testing()
-tests.youtube_testing()
-tests.artikel_testing()
+tests.webapp()
 tests.finish_testing()
