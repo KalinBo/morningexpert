@@ -78,10 +78,16 @@ class MorningexpertTests():
             text_input.send_keys('resent news')
             submit_btn = shadow_root.find_element(By.CSS_SELECTOR, '#submit-icon')
             submit_btn.click()
-            time.sleep(5)
+            time.sleep(10)
         test_AI_shadows_root()
+        def test_tv_sess():
+            self.driver.find_element(By.XPATH, '//*[@id="tv-tab"]').click()
+            time.sleep(2)
+            self.driver.find_element(By.XPATH, '//*[@id="tv"]/div[1]/div[2]/div[3]/div/div/a[3]').click()
+            time.sleep(2)
+            self.driver.find_element(By.XPATH, '//*[@id="tab-tv"]/div[2]/ul/div[2]/div').click()
+        test_tv_sess()
 
-        
 
 
 
