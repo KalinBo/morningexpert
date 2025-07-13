@@ -50,6 +50,17 @@ class MorningexpertTests():
         login_web_app = self.driver.find_element(By.XPATH, "//a[@id='loginButton' and (text())='Login']")
         login_web_app.click()
         time.sleep(2)
+        __username = 'kalinbobchev@gmail.com'
+        __password = 'gnBcvT%4ChZJ'
+        self.driver.find_element(By.XPATH, '//*[@id="my-login-screen"]/div/div/div/form/ul/li[1]/div/div/div[2]/input').send_keys(__username)
+        self.driver.find_element(By.XPATH, '//*[@id="my-login-screen"]/div/div/div/form/ul/li[2]/div/div/div/div/div[2]/input').send_keys(__password)
+        time.sleep(2)
+        elements = self.driver.find_elements(By.XPATH, "//*[@id='loginButton']")
+        elements[1].click()
+        time.sleep(2)
+        chat_tab = self.driver.find_element(By.XPATH, '//*[@id="chat-tab"]')
+        chat_tab.click()
+        time.sleep(2)
 
 
 
