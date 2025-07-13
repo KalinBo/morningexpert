@@ -66,16 +66,23 @@ class MorningexpertTests():
         elements = self.driver.find_elements(By.XPATH, "//*[@id='loginButton']")
         elements[1].click()
         time.sleep(2)
-        chat_tab = self.driver.find_element(By.XPATH, '//*[@id="chat-tab"]')
-        chat_tab.click()
-        time.sleep(4)
-        shadow_host = self.driver.find_element(By.CSS_SELECTOR, 'deep-chat')
-        shadow_root = self.driver.execute_script('return arguments[0].shadowRoot', shadow_host)
-        text_input = shadow_root.find_element(By.CSS_SELECTOR, '#text-input')
-        text_input.send_keys('resent news')
-        submit_btn = shadow_root.find_element(By.CSS_SELECTOR, '#submit-icon')
-        submit_btn.click()
-        time.sleep(5)
+
+        # After login We test the AI input under Shadow-root
+        def test_AI_shadows_root():
+            chat_tab = self.driver.find_element(By.XPATH, '//*[@id="chat-tab"]')
+            chat_tab.click()
+            time.sleep(4)
+            shadow_host = self.driver.find_element(By.CSS_SELECTOR, 'deep-chat')
+            shadow_root = self.driver.execute_script('return arguments[0].shadowRoot', shadow_host)
+            text_input = shadow_root.find_element(By.CSS_SELECTOR, '#text-input')
+            text_input.send_keys('resent news')
+            submit_btn = shadow_root.find_element(By.CSS_SELECTOR, '#submit-icon')
+            submit_btn.click()
+            time.sleep(5)
+        test_AI_shadows_root()
+
+        
+
 
 
 
