@@ -1,3 +1,5 @@
+from weakref import finalize
+
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -5,8 +7,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
+
 class MorningexpertTests():
     def prepare_and_start_testing(self):
+
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         self.driver.implicitly_wait(3)
@@ -42,11 +46,11 @@ class MorningexpertTests():
         time.sleep(1)
 
 
-
     def webapp(self):
         new_url = "https://web.morningexpert.com/#"
         self.driver.get(new_url)
         time.sleep(2)
+        time.sleep(1)
         login_web_app = self.driver.find_element(By.XPATH, "//a[@id='loginButton' and (text())='Login']")
         login_web_app.click()
         time.sleep(2)
@@ -60,7 +64,18 @@ class MorningexpertTests():
         time.sleep(2)
         chat_tab = self.driver.find_element(By.XPATH, '//*[@id="chat-tab"]')
         chat_tab.click()
-        time.sleep(2)
+        time.sleep(4)
+        ##self.driver.find_element(By.ID, '#text-input').send_keys('news')
+        ##time.sleep(1)
+        ##self.driver.find_element(By.XPATH, '//*[@id="submit-icon"]').click()
+        shadow_host = self.driver.find_element(By.CSS_SELECTOR, 'deep-chat')
+        shadow_root = self.driver.execute_script('return arguments[0].shadowRoot', shadow_host)
+        text_input = shadow_root.find_element(By.CSS_SELECTOR, '#text-input')
+        text_input.send_keys('news')
+        submit_btn = shadow_root.find_element(By.CSS_SELECTOR, '#submit-icon')
+        submit_btn.click()
+
+        time.sleep(5)
 
 
 
