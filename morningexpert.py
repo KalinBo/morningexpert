@@ -10,8 +10,14 @@ import time
 
 class MorningexpertTests():
     def prepare_and_start_testing(self):
+        options = Options()
+        prefs = {
+            "profile.default_content_setting_values.notifications": 2  # 2 = Block
+        }
+        options.add_experimental_option("prefs", prefs)
 
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome(options=options)
+        
         self.driver.maximize_window()
         self.driver.implicitly_wait(3)
         self.wait = WebDriverWait(self.driver, 10)
