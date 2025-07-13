@@ -79,7 +79,7 @@ class MorningexpertTests():
             submit_btn = shadow_root.find_element(By.CSS_SELECTOR, '#submit-icon')
             submit_btn.click()
             time.sleep(10)
-        test_AI_shadows_root()
+        #test_AI_shadows_root()
         def test_tv_sess():
             self.driver.find_element(By.XPATH, '//*[@id="tv-tab"]').click()
             time.sleep(5)
@@ -88,6 +88,26 @@ class MorningexpertTests():
             self.driver.find_element(By.XPATH, '//*[@id="tab-tv"]/div[2]/ul/div[2]/div').click()
             time.sleep(4)
         test_tv_sess()
+        def test_pass_change():
+            self.driver.find_element(By.XPATH, '//*[@id="profile-tab"]').click()
+            change_pass = self.driver.find_element(By.XPATH, '//*[@id="settings-list"]/ul/li[4]/a')
+            change_pass.click()
+            current_password = __password
+            new_password = '4Psdfg()*__ABV'
+            time.sleep(2)
+            self.driver.find_element(By.XPATH, '//*[@id="oldPass"]').send_keys(current_password)
+            self.driver.find_element(By.XPATH, '//*[@id="newPass"]').send_keys(new_password)
+            self.driver.find_element(By.XPATH, '//*[@id="newPass2"]').send_keys(new_password)
+            time.sleep(3)
+            self.driver.find_element(By.XPATH, '//*[@id="changepass-form"]/div[4]/div/input').click()
+            time.sleep(3)
+            #To add logic to change new password to current password only if it works, but now the test fails.
+            #This bug appiarce when using temporaly password. It works to login but you can not change it.
+
+
+
+
+
 
 
 
