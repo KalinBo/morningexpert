@@ -21,7 +21,7 @@ def custom_logger(file_level=logging.DEBUG, console_level=logging.INFO):
             logger.addHandler(ch)
 
         # File handler
-        fh = logging.FileHandler(log_file, mode='a')
+        fh = logging.FileHandler(log_file, mode='a', encoding='utf-8')
         fh.setLevel(file_level)
         fh.setFormatter(logging.Formatter(
             '%(asctime)s - %(name)s - %(levelname)s: %(message)s',
