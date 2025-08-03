@@ -59,22 +59,15 @@ WARNING - ‚ùó BUG: Password used for login does not work for changing password ‚
 
 
 How to Run the Automated Test
-Prerequisites
+
 Python 3.x installed
 
 Installation
 Clone the repository and install required Python packages:
-
-bash
-Copy
-Edit
 git clone https://github.com/KalinBo/morningexpert.git
 cd morningexpert
-pip install selenium pytest
-Running the Test
-Execute the test file using pytest:
+pip install selenium
+pip install pytest
 
-bash
-Copy
-Edit
+Execute the test file using pytest:
 pytest test_morningexpert.py -s
