@@ -55,9 +55,11 @@ WARNING - ‚ùó BUG: Password used for login does not work for changing password ‚
 
 ---
 
-## How to start this test
+## How to Start This Test
 
-# Clone the repo and install dependencies
+### Clone the repository and install dependencies
+
+```bash
 git clone <repo-url>
 start command prompt
 cd <project-dir>
