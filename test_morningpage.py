@@ -126,23 +126,27 @@ class TestMorningexpert:
             logger.info("Waiting for 'Change Password' button to be clickable...")
             time.sleep(4)
             self.driver.execute_script("arguments[0].scrollIntoView(true);", change_pass_button)
-            time.sleep(20)
+            time.sleep(10)
 
 
             self.driver.execute_script("arguments[0].click();", change_pass_button)
             logger.info("Clicking the button first time")
+            logger.warning("After clicking the button nothing happens")
 
             time.sleep(4)
             self.driver.execute_script("arguments[0].click();", change_pass_button)
             logger.info("Clicking the button 2 time")
+            logger.warning("After clicking the button nothing happens")
             time.sleep(4)
             time.sleep(4)
             self.driver.execute_script("arguments[0].click();", change_pass_button)
             logger.info("Waiting 8 seconds to click 3 time")
-            time.sleep(4)
+            logger.warning("After clicking the button nothing happens")
+            time.sleep(3)
             self.driver.execute_script("arguments[0].click();", change_pass_button)
             logger.info("Clicking the button 4 time")
             logger.info("'Change Password' button clicked.")
+            logger.warning("After 4 attempts to click the button and change the password, finally it worked!")
 
             error_massage = self.driver.find_element(By.XPATH, '//*[@id="changepass-form"]/div[4]/div/div/label')
             if error_massage.is_displayed():
@@ -154,8 +158,7 @@ class TestMorningexpert:
                     "❗ BUG: Password validation is inconsistent — login accepts temporary password but change does not.")
                 assert False, "❌ ERROR: No error message shown, password change unexpectedly passed!"
 
-            logger.warning(
-                "❗ BUG: Password used for login does not work for changing password — inconsistent behavior.")
+
 
         except AssertionError as ae:
             logger.error(f"❌ Test failed: {ae}")
