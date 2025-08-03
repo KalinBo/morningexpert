@@ -53,7 +53,9 @@ INFO - Attempted password change using the same temporary password as old.
 INFO - 'Change Password' button clicked.
 WARNING - ❗ BUG: Password used for login does not work for changing password — inconsistent behavior.
 
-### How to run the test
+---
+
+### How to start this test:
 * start command prompt
 * navigate to the test_morningexpert.py file
 * pytest test_morningexpert.py -s
