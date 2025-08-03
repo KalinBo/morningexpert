@@ -3,7 +3,7 @@ import pytest
 
 @pytest.fixture()
 def setup():
-    print('преди всичко стартирам това')
+    print('Automation test for Morningexpert.com')
     yield
     print('THE END of the test')
 
@@ -12,12 +12,12 @@ def setup():
 def onetimesetup(browser, os_type):
     print('*************************** Starting tests ....... ***********************')
     yield
-    print('*********************THE END of the test*********************')
+    print('********************* THE END of all the tests *********************')
 
 
 def pytest_addoption(parser):
     parser.addoption('--browser')
-    parser.addoption('--os_type', help='Alab Bala')
+    parser.addoption('--os_type', help='Windows or Mac')
 
 
 @pytest.fixture(scope='module')
