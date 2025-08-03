@@ -55,16 +55,25 @@ WARNING - ‚ùó BUG: Password used for login does not work for changing password ‚
 
 ---
 
-## How to Start This Test
+How to Run the Automated Test
+Prerequisites
+Python 3.x installed
 
-### Clone the repository and install dependencies
+ChromeDriver (or other appropriate WebDriver) installed and added to your system PATH
 
-```bash
-git clone <repo-url>
-start command prompt
-cd <project-dir>
-pip install selenium
-pip install pytest
+Installation
+Clone the repository and install required Python packages:
 
-# Run the test
+bash
+Copy
+Edit
+git clone https://github.com/KalinBo/morningexpert.git
+cd morningexpert
+pip install selenium pytest
+Running the Test
+Execute the test file using pytest:
+
+bash
+Copy
+Edit
 pytest test_morningexpert.py -s
