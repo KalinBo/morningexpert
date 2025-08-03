@@ -1,47 +1,51 @@
-## 🐞 Bug: Temporary Password Accepted at Login but Rejected When Changing Password
+# MorningExpert Automated Tests & Bug Report
+
+## 🐞 Bug Report: Temporary Password Accepted at Login but Rejected When Changing Password
 
 ### Summary
 
-When a user logs in with a temporary password, authentication succeeds. However, trying to change the password using the same temporary password as the current one results in an error:  
-**"Incorrect old password."**
+When logging in with a temporary password, authentication succeeds. However, trying to change the password by submitting the same temporary password as the current one results in the error:
 
-This indicates a mismatch in password validation logic between the login and the change-password form.
+> **"Current password does not match."**
+
+This points to inconsistent password validation logic between login and password change.
 
 ---
 
 ### Steps to Reproduce
 
-1. Go to: https://web.morningexpert.com/#  
-2. Click **Login**
-3. Enter credentials:
-   - **Username**: `kalinbobchev@gmail.com`
-   - **Password**: `gnBcvT%4ChZJ` (temporary password)
-4. Click **Login**
-5. Navigate to **Profile** → **Change Password**
-6. Fill the form:
-   - Old password: `gnBcvT%4ChZJ`
-   - New password: `4Psdfg()*__ABV`
-   - Confirm new password: `4Psdfg()*__ABV`
+1. Open [https://web.morningexpert.com/#](https://web.morningexpert.com/#)  
+2. Click **Login**  
+3. Enter credentials:  
+   - **Username**: `kalinbobchev@gmail.com`  
+   - **Password**: `gnBcvT%4ChZJ` (temporary password)  
+4. Click **Login**  
+5. Navigate to **Profile** → **Change Password**  
+6. Fill in the form:  
+   - Old password: `gnBcvT%4ChZJ`  
+   - New password: `4Psdfg()*__ABV`  
+   - Confirm new password: `4Psdfg()*__ABV`  
 7. Click **Change**
 
 ---
 
 ### Expected Behavior
 
-The password should be updated successfully since the old password is valid (used for login moments earlier).
+The password should be successfully updated because the old password used for login is correct.
 
 ---
 
 ### Actual Behavior
 
-An error message is displayed:
+An error message appears:
+
 > **Current password does not match.**
 
-This prevents the password from being changed, despite being valid during login.
+Password change is blocked despite correct credentials.
 
 ---
 
-### Log Output (via Selenium + Pytest)
+### Log Output (from Selenium + Pytest)
 
 ```log
 INFO - Opened MorningExpert web app.
@@ -53,13 +57,10 @@ INFO - Attempted password change using the same temporary password as old.
 INFO - 'Change Password' button clicked.
 WARNING - ❗ BUG: Password used for login does not work for changing password — inconsistent behavior.
 
----
 
 How to Run the Automated Test
 Prerequisites
 Python 3.x installed
-
-ChromeDriver (or other appropriate WebDriver) installed and added to your system PATH
 
 Installation
 Clone the repository and install required Python packages:
