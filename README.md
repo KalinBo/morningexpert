@@ -55,7 +55,14 @@ WARNING - ‚ùó BUG: Password used for login does not work for changing password ‚
 
 ---
 
-**### How to start this test**:
-* start command prompt
-* navigate to the test_morningexpert.py file
-* pytest test_morningexpert.py -s
+## How to start this test
+
+# Clone the repo and install dependencies
+git clone <repo-url>
+start command prompt
+cd <project-dir>
+pip install selenium
+pip install pytest
+
+# Run the test
+pytest test_morningexpert.py -s
