@@ -55,7 +55,7 @@ WARNING - ‚ùó BUG: Password used for login does not work for changing password ‚
 
 ---
 
-### How to start this test:
+**### How to start this test**:
 * start command prompt
 * navigate to the test_morningexpert.py file
 * pytest test_morningexpert.py -s
