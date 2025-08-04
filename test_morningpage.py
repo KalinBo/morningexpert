@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
 
-@pytest.mark.usefixtures("setup", "onetimesetup")
+@pytest.mark.usefixtures("driver_setup")
 class TestMorningexpert:
 
 
