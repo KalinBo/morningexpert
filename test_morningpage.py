@@ -116,21 +116,21 @@ class TestMorningexpert:
             error_massage = self.driver.find_element(By.XPATH, '//*[@id="changepass-form"]/div[4]/div/div/label')
             if error_massage.is_displayed():
                 logger.warning(
-                    "❗ BUG: Password used for login does not work for changing password — inconsistent behavior.")
+                    " BUG: Password used for login does not work for changing password — inconsistent behavior.")
             else:
-                logger.error("❌ ERROR: No error message shown, password change unexpectedly passed!")
+                logger.error(" ERROR: No error message shown, password change unexpectedly passed!")
                 logger.error(
-                    "❗ BUG: Password validation is inconsistent — login accepts temporary password but change does not.")
-                assert False, "❌ ERROR: No error message shown, password change unexpectedly passed!"
+                    " BUG: Password validation is inconsistent — login accepts temporary password but change does not.")
+                assert False, " ERROR: No error message shown, password change unexpectedly passed!"
 
 
 
         except AssertionError as ae:
-            logger.error(f"❌ Test failed: {ae}")
+            logger.error(f" Test failed: {ae}")
             raise
 
         except Exception as e:
-            logger.exception("💥 Unexpected exception occurred during password change test.")
+            logger.exception(" Unexpected exception occurred during password change test.")
             raise
 
     # After login We test the AI input under Shadow-root
