@@ -12,19 +12,6 @@ from selenium.webdriver.common.keys import Keys
 
 @pytest.mark.usefixtures("setup", "onetimesetup")
 class TestMorningexpert:
-    def setup_method(self):
-        options = Options()
-        prefs = {
-            "profile.default_content_setting_values.notifications": 2
-        }
-        options.add_experimental_option("prefs", prefs)
-        self.driver = webdriver.Chrome(options=options)
-        self.driver.maximize_window()
-        self.driver.implicitly_wait(3)
-        self.wait = WebDriverWait(self.driver, 10)
-
-    def teardown_method(self):
-        self.driver.quit()
 
 
     # def test_youtube(self):
@@ -46,30 +33,8 @@ class TestMorningexpert:
     #     time.sleep(8)
 
 
-    # This is only the login
-    # def test_login(self):
-    #     new_url = "https://web.morningexpert.com/#"
-    #     self.driver.get(new_url)
-    #     time.sleep(2)
-    #     time.sleep(1)
-    #     login_web_app = self.driver.find_element(By.XPATH, "//a[@id='loginButton' and (text())='Login']")
-    #     login_web_app.click()
-    #     time.sleep(2)
-    #     __username = 'kalinbobchev@gmail.com'
-    #     __password = 'gnBcvT%4ChZJ'
-    #     self.driver.find_element(By.XPATH,
-    #                              '//*[@id="my-login-screen"]/div/div/div/form/ul/li[1]/div/div/div[2]/input').send_keys(
-    #         __username)
-    #     self.driver.find_element(By.XPATH,
-    #                              '//*[@id="my-login-screen"]/div/div/div/form/ul/li[2]/div/div/div/div/div[2]/input').send_keys(
-    #         __password)
-    #     time.sleep(2)
-    #     elements = self.driver.find_elements(By.XPATH, "//*[@id='loginButton']")
-    #     elements[1].click()
-    #     assert elements
-    #     time.sleep(2)
 
-    def tst_password_change_should_fail(self):
+    def test_password_change_should_fail(self):
         logger = custom_logger(logging.DEBUG, logging.INFO)
         logger.info("Starting test: test_password_change_should_fail")
 
@@ -169,73 +134,73 @@ class TestMorningexpert:
             raise
 
     # After login We test the AI input under Shadow-root
-    def test_AI_shadows_root(self):
-        new_url = "https://web.morningexpert.com/#"
-        self.driver.get(new_url)
-        time.sleep(1)
-        login_web_app = self.driver.find_element(By.XPATH, "//a[@id='loginButton' and (text())='Login']")
-        login_web_app.click()
-        time.sleep(2)
-        __username = 'kalinbobchev@gmail.com'
-        __password = 'gnBcvT%4ChZJ'
-        self.driver.find_element(By.XPATH,
-                                 '//*[@id="my-login-screen"]/div/div/div/form/ul/li[1]/div/div/div[2]/input').send_keys(
-            __username)
-        self.driver.find_element(By.XPATH,
-                                 '//*[@id="my-login-screen"]/div/div/div/form/ul/li[2]/div/div/div/div/div[2]/input').send_keys(
-            __password)
-        time.sleep(2)
-        elements = self.driver.find_elements(By.XPATH, "//*[@id='loginButton']")
-        elements[1].click()
-        time.sleep(2)
-        chat_tab = self.driver.find_element(By.XPATH, '//*[@id="chat-tab"]')
-        chat_tab.click()
-        time.sleep(4)
-        shadow_host = self.driver.find_element(By.CSS_SELECTOR, 'deep-chat')
-        shadow_root = self.driver.execute_script('return arguments[0].shadowRoot', shadow_host)
-        #text_input = shadow_root.find_element(By.CSS_SELECTOR, '#text-input')
-        text_input = self.driver.execute_script('return arguments[0].shadowRoot.querySelector("#text-input")',
-                                                shadow_host)
-        text_input.send_keys('resent news')
-        #submit_btn = shadow_root.find_element(By.CSS_SELECTOR, '#submit-icon')
-        submit_btn = self.driver.execute_script('return arguments[0].shadowRoot.querySelector("#submit-icon")',
-                                                shadow_host)
-        submit_btn.click()
-        time.sleep(10)
-        #ai_answer = shadow_root.find_element(By.XPATH, '//*[@id="messages"]/div[3]/div/div[2]')
-
-
-        ai_answer = self.driver.execute_script(
-            'return arguments[0].shadowRoot.querySelector("#messages > div:nth-child(3) > div > div:nth-child(2)")',
-            shadow_host)
-
-        assert ai_answer
-
-    #test_AI_shadows_root()
-    def test_tv_sess(self):
-        new_url = "https://web.morningexpert.com/#"
-        self.driver.get(new_url)
-        time.sleep(1)
-        login_web_app = self.driver.find_element(By.XPATH, "//a[@id='loginButton' and (text())='Login']")
-        login_web_app.click()
-        time.sleep(2)
-        __username = 'kalinbobchev@gmail.com'
-        __password = 'gnBcvT%4ChZJ'
-        self.driver.find_element(By.XPATH,
-                                 '//*[@id="my-login-screen"]/div/div/div/form/ul/li[1]/div/div/div[2]/input').send_keys(
-            __username)
-        self.driver.find_element(By.XPATH,
-                                 '//*[@id="my-login-screen"]/div/div/div/form/ul/li[2]/div/div/div/div/div[2]/input').send_keys(
-            __password)
-        time.sleep(2)
-        elements = self.driver.find_elements(By.XPATH, "//*[@id='loginButton']")
-        elements[1].click()
-        self.driver.find_element(By.XPATH, '//*[@id="tv-tab"]').click()
-        time.sleep(5)
-        self.driver.find_element(By.XPATH, '//*[@id="tv"]/div[1]/div[2]/div[3]/div/div/a[3]').click()
-        time.sleep(2)
-        self.driver.find_element(By.XPATH, '//*[@id="tab-tv"]/div[2]/ul/div[2]/div').click()
-        time.sleep(4)
+    # def test_AI_shadows_root(self):
+    #     new_url = "https://web.morningexpert.com/#"
+    #     self.driver.get(new_url)
+    #     time.sleep(1)
+    #     login_web_app = self.driver.find_element(By.XPATH, "//a[@id='loginButton' and (text())='Login']")
+    #     login_web_app.click()
+    #     time.sleep(2)
+    #     __username = 'kalinbobchev@gmail.com'
+    #     __password = 'gnBcvT%4ChZJ'
+    #     self.driver.find_element(By.XPATH,
+    #                              '//*[@id="my-login-screen"]/div/div/div/form/ul/li[1]/div/div/div[2]/input').send_keys(
+    #         __username)
+    #     self.driver.find_element(By.XPATH,
+    #                              '//*[@id="my-login-screen"]/div/div/div/form/ul/li[2]/div/div/div/div/div[2]/input').send_keys(
+    #         __password)
+    #     time.sleep(2)
+    #     elements = self.driver.find_elements(By.XPATH, "//*[@id='loginButton']")
+    #     elements[1].click()
+    #     time.sleep(2)
+    #     chat_tab = self.driver.find_element(By.XPATH, '//*[@id="chat-tab"]')
+    #     chat_tab.click()
+    #     time.sleep(4)
+    #     shadow_host = self.driver.find_element(By.CSS_SELECTOR, 'deep-chat')
+    #     shadow_root = self.driver.execute_script('return arguments[0].shadowRoot', shadow_host)
+    #     #text_input = shadow_root.find_element(By.CSS_SELECTOR, '#text-input')
+    #     text_input = self.driver.execute_script('return arguments[0].shadowRoot.querySelector("#text-input")',
+    #                                             shadow_host)
+    #     text_input.send_keys('resent news')
+    #     #submit_btn = shadow_root.find_element(By.CSS_SELECTOR, '#submit-icon')
+    #     submit_btn = self.driver.execute_script('return arguments[0].shadowRoot.querySelector("#submit-icon")',
+    #                                             shadow_host)
+    #     submit_btn.click()
+    #     time.sleep(10)
+    #     #ai_answer = shadow_root.find_element(By.XPATH, '//*[@id="messages"]/div[3]/div/div[2]')
+    #
+    #
+    #     ai_answer = self.driver.execute_script(
+    #         'return arguments[0].shadowRoot.querySelector("#messages > div:nth-child(3) > div > div:nth-child(2)")',
+    #         shadow_host)
+    #
+    #     assert ai_answer
+    #
+    # #test_AI_shadows_root()
+    # def test_tv_sess(self):
+    #     new_url = "https://web.morningexpert.com/#"
+    #     self.driver.get(new_url)
+    #     time.sleep(1)
+    #     login_web_app = self.driver.find_element(By.XPATH, "//a[@id='loginButton' and (text())='Login']")
+    #     login_web_app.click()
+    #     time.sleep(2)
+    #     __username = 'kalinbobchev@gmail.com'
+    #     __password = 'gnBcvT%4ChZJ'
+    #     self.driver.find_element(By.XPATH,
+    #                              '//*[@id="my-login-screen"]/div/div/div/form/ul/li[1]/div/div/div[2]/input').send_keys(
+    #         __username)
+    #     self.driver.find_element(By.XPATH,
+    #                              '//*[@id="my-login-screen"]/div/div/div/form/ul/li[2]/div/div/div/div/div[2]/input').send_keys(
+    #         __password)
+    #     time.sleep(2)
+    #     elements = self.driver.find_elements(By.XPATH, "//*[@id='loginButton']")
+    #     elements[1].click()
+    #     self.driver.find_element(By.XPATH, '//*[@id="tv-tab"]').click()
+    #     time.sleep(5)
+    #     self.driver.find_element(By.XPATH, '//*[@id="tv"]/div[1]/div[2]/div[3]/div/div/a[3]').click()
+    #     time.sleep(2)
+    #     self.driver.find_element(By.XPATH, '//*[@id="tab-tv"]/div[2]/ul/div[2]/div').click()
+    #     time.sleep(4)
 
 
 
