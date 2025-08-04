@@ -1,93 +1,86 @@
 # MorningExpert Automated Tests & Bug Report
 
-Automated end-to-end tests using **Selenium**, **Pytest**, and **pytest-xdist**, supporting **parallel cross-browser testing** (Chrome, Firefox, Edge).
+Automated end-to-end test suite using **Selenium**, **Pytest**, and **pytest-xdist**, with support for **parallel cross-browser execution** (Chrome, Firefox, Edge).
 
 ---
 
-## 🐞 Bug Report: Inconsistent Password Validation
+## Bug Report: Inconsistent Password Validation
 
 ### Summary
 
-The system **accepts a temporary password at login**, but **rejects the same password** when attempting to change it. This leads to inconsistent password validation logic between the login flow and the "Change Password" form.
+The system accepts a temporary password at login, but rejects the same password when attempting to change it. This indicates inconsistent password validation logic between the login and password change mechanisms.
 
-### 🔁 Steps to Reproduce
+### Steps to Reproduce
 
-1. Open [https://web.morningexpert.com/#](https://web.morningexpert.com/#)  
+1. Navigate to: https://web.morningexpert.com/#  
 2. Click **Login**
-3. Use:
+3. Use the following credentials:  
    - **Username:** `kalinbobchev@gmail.com`  
    - **Password:** `gnBcvT%4ChZJ` (temporary password)
 4. Click **Login**
-5. Go to **Profile** → **Change Password**
-6. Submit:
-   - **Old password:** `gnBcvT%4ChZJ`
-   - **New password:** `4Psdfg()*__ABV`
-   - **Confirm password:** `4Psdfg()*__ABV`
+5. Navigate to **Profile** → **Change Password**
+6. Fill in the form:
+   - Old password: `gnBcvT%4ChZJ`
+   - New password: `4Psdfg()*__ABV`
+   - Confirm password: `4Psdfg()*__ABV`
 7. Click **Change**
 
 ### Expected Behavior
 
-The password should be changed successfully since the old password is valid and accepted during login.
+Password should be successfully updated, as the old password is valid and was accepted at login.
 
 ### Actual Behavior
 
-The form displays:
-> **"Current password does not match."**
+The application displays an error:
 
-### Log Output (Selenium + Pytest)
+> "Current password does not match."
 
-```log
-INFO - Opened MorningExpert web app.
-INFO - Clicked Login button.
-INFO - Entered credentials and attempting login...
-INFO - Login successful with temporary password.
-INFO - Navigated to 'Change Password' section.
-INFO - Attempted password change using the same temporary password as old.
-INFO - 'Change Password' button clicked.
-WARNING - ❗ BUG: Password used for login does not work for changing password — inconsistent behavior.
+### Test Log Output (Pytest + Selenium)
 
-**Automated Test Stack**
-Tool	Purpose
-Selenium WebDriver	Browser automation
-Pytest	Test framework
-Pytest-xdist	Parallel test execution
-Chrome, Firefox, Edge	Cross-browser compatibility testing
+---
 
-**Installation & Setup**
-Prerequisites
+## Test Stack
 
-Python 3.8+ installed
-Google Chrome, Mozilla Firefox, and Microsoft Edge installed
-selenium>=4.11.0
-pytest>=7.4.0
-pytest-xdist>=3.3.1
-Clone the Repository
-Command prompt or bash
+| Tool               | Purpose                              |
+|--------------------|--------------------------------------|
+| Selenium WebDriver | Browser automation                   |
+| Pytest             | Python test framework                |
+| pytest-xdist       | Parallel test execution              |
+| Chrome / Firefox / Edge | Cross-browser compatibility testing |
+
+---
+
+## Installation & Setup
+
+### Prerequisites
+
+- Python 3.8+
+- Google Chrome, Mozilla Firefox, and Microsoft Edge
+- WebDrivers (ChromeDriver, GeckoDriver, EdgeDriver) — auto-managed via Selenium Manager
+
+### Clone the Repository
+
 git clone https://github.com/KalinBo/morningexpert.git
 cd morningexpert
 pip install selenium pytest pytest-xdist
-
-
-**Running Tests**
-Default (Single Browser - Chrome)
+## Running Tests
+Default (Single Browser: Chrome)
 
 pytest test_morningpage.py -v -s
+### Parallel Cross-Browser Execution
+Run tests in parallel across multiple browsers:
 
-Cross-Browser Parallel Testing
-**Run tests in parallel across multiple browsers:**
+pytest test_morningpage.py -n 3 --browser firefox --browser edge -v -s
 
-pytest -n 3 --browser firefox --browser edge -v -s
-You can specify just one and remember you have Default - Chrome:
+Note: If no --browser is specified, tests default to Chrome.
 
-pytest --browser firefox -v
-
-Test Files
+Test Structure
 File	Description
-test_morningexpert.py	Test for login and password change bug
-conftest.py
-custom_logger.py
+test_morningexpert.py	Main test file for login and password validation
+conftest.py	Shared fixtures and browser configuration
+custom_logger.py	Custom logging utility for debug and trace logs
 
-👨‍💻 Author
+Author
 Kalin Bobchev
-📧 kalinbobchev@gmail.com
-🔗 GitHub: github.com/KalinBo
+github.com/KalinBo
+kalinbobchev@gmail.com
