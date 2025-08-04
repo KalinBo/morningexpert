@@ -32,6 +32,7 @@ def driver_setup(request, browser_name):
         options = FirefoxOptions()
         options.set_preference("dom.webnotifications.enabled", False)  # disable notifications
         options.set_preference("permissions.default.desktop-notification", 2)  # deny permission by default
+
         driver = webdriver.Firefox(options=options)
 
     elif browser_name == "edge":
