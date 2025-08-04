@@ -63,6 +63,7 @@ The application displays an error:
 git clone https://github.com/KalinBo/morningexpert.git
 cd morningexpert
 pip install selenium pytest pytest-xdist
+
 ### Running Tests
 If no --browser option is provided, Chrome is used as the default browser.
 
@@ -71,7 +72,6 @@ To run all 3 browsers in parallel:
 pytest test_morningpage.py -n 3 --browser firefox --browser edge -v -s
 
 ### Project Structure
-- Files:
 - test_morningexpert.py - 	Main test file validating login and password change logic
 - conftest.py - 	Pytest fixtures, browser setup, and CLI integration
 - custom_logger.py - 	Custom logging utility for detailed test output logs
