@@ -8,14 +8,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 def pytest_addoption(parser):
     parser.addoption(
         "--browser",
-        action="append",
-        default=["chrome"],
-        help="Browsers to run tests on. Use multiple times: --browser chrome --browser firefox"
+        action="store",
+        default="chrome",
+        help="Comma-separated browsers (chrome,firefox,edge)"
     )
 
 def pytest_generate_tests(metafunc):
     if "browser_name" in metafunc.fixturenames:
-        browsers = metafunc.config.getoption("browser")
+        browser_option = metafunc.config.getoption("browser")
+        browsers = browser_option.split(",")
         metafunc.parametrize("browser_name", browsers)
 
 @pytest.fixture(scope="function")
@@ -32,7 +33,6 @@ def driver_setup(request, browser_name):
         options = FirefoxOptions()
         options.set_preference("dom.webnotifications.enabled", False)  # disable notifications
         options.set_preference("permissions.default.desktop-notification", 2)  # deny permission by default
-
         driver = webdriver.Firefox(options=options)
 
     elif browser_name == "edge":
