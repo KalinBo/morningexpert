@@ -66,10 +66,10 @@ The application displays an error:
 
 ### Running Tests
 * If no --browser option is provided, Chrome is used as the default browser.
-
 * To run all 3 browsers in parallel:
-
-* pytest test_morningpage.py -n 3 --browser firefox --browser edge -v -s
+* pytest test_morningpage.py -n 3 --browser firefox,edge,chrome -v
+* To run any browsers one by one:
+* pytest test_morningpage.py --browser firefox,edge,chrome -v
 
 ### Project Structure
 - test_morningpage.py - 	Main test file validating login and password change logic
